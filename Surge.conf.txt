@@ -111,7 +111,7 @@ RULE-SET,https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Surge
 # > 苹果服务
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list,苹果服务
 # > 全球加速
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Proxy/Proxy_All_No_Resolve.list
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Proxy/Proxy_All_No_Resolve.list,全球加速
 # > GeoIP China
 GEOIP,CN,DIRECT
 # 兜底规则
