@@ -60,8 +60,6 @@ udp-policy-not-supported-behaviour = reject
 [Proxy Group]
 # 苹果服务
 苹果服务 = select, DIRECT, REJECT, 香港, 新加坡, 美国, no-alert=0, hidden=0, include-all-proxies=0
-# 国内媒体
-国内媒体 = select, DIRECT, REJECT, 香港, no-alert=0, hidden=0, include-all-proxies=0
 # 国际媒体
 国际媒体 = select, 香港, DIRECT, REJECT, 新加坡, 美国, no-alert=0, hidden=0, include-all-proxies=0
 # 全球加速
