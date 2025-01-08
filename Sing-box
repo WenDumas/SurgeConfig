@@ -1,29 +1,23 @@
 {
-  "type": "trojan",
-  "tag": "trojan-in",
+  "type": "vmess",
+  "tag": "vmess-out",
 
-  ... // Listen Fields
-
-  "users": [104.16.6.231
-    {
-      "name": "US-1",
-      "password": "BnAp2IpjuE"
-    }
-  ],
-  "tls": {true},
-  "fallback": {
-    "server": "127.0.0.1",
-    "server_port": 8080
-  },
-  "fallback_for_alpn": {
-    "http/1.1": {
-      "server": "127.0.0.1",
-      "server_port": 8081
-    }
-  },
+  "server": "104.16.0.255",
+  "server_port": 443,
+  "uuid": "bf191fa3-a86f-426a-9740-1bf8f0df569d",
+  "security": "auto",
+  "alter_id": 0,
+  "global_padding": false,
+  "authenticated_length": true,
+  "network": "tcp",
+  "tls": {},
+  "packet_encoding": "",
+  "transport": {},
   "multiplex": {},
-  "transport": {}
+
+  ... // Dial Fields
 }
+
 {
   "dns": {
     "fakeip": {
