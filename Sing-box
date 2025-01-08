@@ -10,7 +10,7 @@
   "global_padding": false,
   "authenticated_length": true,
   "network": "ws",
-  "tls": {},
+  "tls": {true},
   "packet_encoding": "",
   "transport": {},
   "multiplex": {},
