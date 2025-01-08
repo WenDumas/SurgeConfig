@@ -15,7 +15,6 @@
   "transport": {},
   "multiplex": {},
 
-  ... // Dial Fields
 }
 
 {
