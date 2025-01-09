@@ -1,3 +1,11 @@
+proxy-providers:
+  1:
+    url: "https://gist.githubusercontent.com/trangjian/e938b94ce9f0b6a12c3e43130b213271/raw/PC"
+    type: http
+    interval: 86400
+    health-check: {enable: true,url: "https://www.gstatic.com/generate_204", interval: 300}
+    override:
+      additional-prefix: "[1]"
 [custom]
 ;不要随意改变关键字，否则会导致出错
 ;acl4SSR规则
