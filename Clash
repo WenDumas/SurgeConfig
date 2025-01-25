@@ -75,31 +75,31 @@ proxy-groups:
 
   - name: Google
     type: select
-    proxies: [默认,新加坡,美国,自动选择]
+    proxies: [默认,自动选择,新加坡,美国,其它地区,全部节点]
 
   - name: Telegram
     type: select
-    proxies: [默认,新加坡,美国,自动选择]
+    proxies: [默认,自动选择,新加坡,美国,其它地区,全部节点]
 
   - name: Twitter
     type: select
-    proxies: [默认,新加坡,美国,自动选择]
+    proxies: [默认,自动选择,新加坡,美国,其它地区,全部节点]
 
   - name: YouTube
     type: select
-    proxies: [默认,新加坡,美国,自动选择]
+    proxies: [默认,自动选择,新加坡,美国,其它地区,全部节点]
 
   - name: Spotify
     type: select
-    proxies:  [默认,新加坡,美国,自动选择]
+    proxies:  [默认,自动选择,新加坡,美国,其它地区,全部节点]
 
   - name: Github
     type: select
-    proxies:  [默认,新加坡,美国,自动选择]
+    proxies:  [默认,自动选择,新加坡,美国,其它地区,全部节点]
 
   - name: 国内
     type: select
-    proxies:  [直连,默认,新加坡,美国,自动选择]
+    proxies:  [直连,默认,新加坡,美国,其它地区,全部节点,自动选择]
 
   - name: 其他
     type: select
