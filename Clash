@@ -71,7 +71,7 @@ proxy-groups:
 
   - name: 默认
     type: select
-    proxies: [自动选择,新加坡,美国,其它地区,全部节点]
+    proxies: [自动选择,新加坡,美国,其它地区,直连,全部节点]
 
   - name: Google
     type: select
