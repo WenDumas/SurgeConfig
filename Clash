@@ -97,10 +97,6 @@ proxy-groups:
     type: select
     proxies:  [默认,新加坡,美国,自动选择]
 
-  - name: Tiktok
-    type: select
-    proxies:  [默认,新加坡,美国,自动选择]
-
   - name: 国内
     type: select
     proxies:  [直连,默认,新加坡,美国,自动选择]
