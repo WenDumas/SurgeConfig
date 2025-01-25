@@ -144,7 +144,6 @@ rules:
   - RULE-SET,telegram_domain,Telegram
   - RULE-SET,netflix_domain,NETFLIX
   - RULE-SET,spotify_domain,Spotify
-  - RULE-SET,TikTok,Tiktok
   - RULE-SET,cn_domain,国内
   - RULE-SET,geolocation-!cn,其他
 
