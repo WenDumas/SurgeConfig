@@ -67,7 +67,7 @@ overwrite_original_rules=true
 
 ;luck
 
-USER-AGENT,🎯 TikTok*
+[Rule]
 DOMAIN-KEYWORD,tiktokcdn,🎯 TikTok
 DOMAIN-SUFFIX,byteoversea.com,🎯 TikTok
 DOMAIN-SUFFIX,ibytedtos.com,🎯 TikTok
