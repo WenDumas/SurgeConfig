@@ -67,14 +67,14 @@ overwrite_original_rules=true
 
 ;luck
 
-USER-AGENT,TikTok*
-DOMAIN-KEYWORD,tiktokcdn,🎯TikTok
-DOMAIN-SUFFIX,byteoversea.com,🎯TikTok
-DOMAIN-SUFFIX,ibytedtos.com,🎯TikTok
-DOMAIN-SUFFIX,ipstatp.com,🎯TikTok
-DOMAIN-SUFFIX,muscdn.com,🎯TikTok
-DOMAIN-SUFFIX,musical.ly,🎯TikTok
-DOMAIN-SUFFIX,tik-tokapi.com,🎯TikTok
-DOMAIN-SUFFIX,tiktok.com,🎯TikTok
-DOMAIN-SUFFIX,tiktokcdn.com,🎯TikTok
-DOMAIN-SUFFIX,tiktokv.com,🎯TikTok
+USER-AGENT,🎯 TikTok*
+DOMAIN-KEYWORD,tiktokcdn,🎯 TikTok
+DOMAIN-SUFFIX,byteoversea.com,🎯 TikTok
+DOMAIN-SUFFIX,ibytedtos.com,🎯 TikTok
+DOMAIN-SUFFIX,ipstatp.com,🎯 TikTok
+DOMAIN-SUFFIX,muscdn.com,🎯 TikTok
+DOMAIN-SUFFIX,musical.ly,🎯 TikTok
+DOMAIN-SUFFIX,tik-tokapi.com,🎯 TikTok
+DOMAIN-SUFFIX,tiktok.com,🎯 TikTok
+DOMAIN-SUFFIX,tiktokcdn.com,🎯 TikTok
+DOMAIN-SUFFIX,tiktokv.com,🎯 TikTok
