@@ -1,7 +1,21 @@
+# ================= 遠程訂閱配置 =================
+proxy-providers:
+  MySub:
+    type: http
+    url: "https://misub.88666.de5.net/profiles/42c60cca-6b01-4f8f-b248-41cf5f49c8c4?clash"
+    interval: 3600
+    path: ./providers/mysub.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: http://www.gstatic.com/generate_204
+
 proxy-groups:
   - name: 节点选择
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png
     type: select
+    use:
+      - MySub
     proxies:
       - 自动选择
       - 手动切换
@@ -10,11 +24,15 @@ proxy-groups:
   - name: 手动切换
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/select.png
     include-all: true
+    use:
+      - MySub
     type: select
   - name: 自动选择
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
     type: url-test
     include-all: true
+    use:
+      - MySub
     interval: 300
     tolerance: 50
   - name: 电报消息
@@ -116,6 +134,8 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Netease_Music.png
     type: select
     include-all: true
+    use:
+      - MySub
     filter: (?i)网易|音乐|NetEase|Music
     proxies:
       - DIRECT
@@ -137,10 +157,11 @@ proxy-groups:
       - 狮城节点
       - 美国节点
       - 手动切换
-
   - name: 美国节点
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png
     include-all: true
+    use:
+      - MySub
     filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
     type: url-test
     interval: 300
@@ -148,6 +169,8 @@ proxy-groups:
   - name: 狮城节点
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png
     include-all: true
+    use:
+      - MySub
     filter: (?i)新加坡|坡|狮城|SG|Singapore
     type: url-test
     interval: 300
@@ -155,6 +178,8 @@ proxy-groups:
   - name: GLOBAL
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png
     include-all: true
+    use:
+      - MySub
     type: select
     proxies:
       - 节点选择
