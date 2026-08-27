@@ -2,7 +2,7 @@
 proxy-providers:
   MySub:
     type: http
-    url: "https://misub.88666.de5.net/profiles/42c60cca-6b01-4f8f-b248-41cf5f49c8c4?clash"
+    url: "https://misub.88666.de5.net/profiles/42c60cca-6b01-4f8f-b248-41cf5f49c8c4"
     interval: 3600
     path: ./providers/mysub.yaml
     health-check:
