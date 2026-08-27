@@ -9,7 +9,7 @@ p: &p {type: http, interval: 3600, health-check: {enable: true, url: "https://ww
 proxy-providers:
   provider1:
     <<: *p
-    url: ""
+    url: "https://misub.88666.de5.net/profiles/42c60cca-6b01-4f8f-b248-41cf5f49c8c4"
   provider2:
     <<: *p
     url: ""
