@@ -67,20 +67,20 @@ proxy-groups:
     interval: 300
     tolerance: 50
 
-  - name: AIGC
+- name: AIGC
     type: select
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Bot.png
-    proxies: [SG AUTO, JP AUTO, US AUTO]
+    proxies: [PROXY, AUTO, SG AUTO, JP AUTO, US AUTO]
 
   - name: Telegram
     type: select
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
-    proxies: [HK AUTO, SG AUTO, JP AUTO, US AUTO]
+    proxies: [PROXY, AUTO, HK AUTO, SG AUTO, JP AUTO, US AUTO]
 
   - name: Google
     type: select
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png
-    proxies: [HK AUTO, SG AUTO, JP AUTO, US AUTO]
+    proxies: [PROXY, AUTO, HK AUTO, SG AUTO, JP AUTO, US AUTO]
 
   - name: HK AUTO
     type: url-test
