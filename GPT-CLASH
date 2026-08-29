@@ -1,0 +1,138 @@
+# ================= 锚点配置 =================
+anchors:
+  provider: &p {type: http, interval: 3600, health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}}
+  mrs_domain: &mrs_domain {type: http, behavior: domain, format: mrs, interval: 86400}
+  mrs_ip: &mrs_ip {type: http, behavior: ipcidr, format: mrs, interval: 86400}
+
+# ================= 远端订阅 =================
+proxy-providers:
+  MySub:
+    <<: *p
+    url: "https://你的订阅链接填这里"
+    path: ./providers/mysub.yaml
+
+# ================= 规则集 (高性能 .mrs) =================
+rule-providers:
+  private:
+    <<: *mrs_domain
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
+    path: ./ruleset/private.mrs
+  cn_domain:
+    <<: *mrs_domain
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+    path: ./ruleset/cn_domain.mrs
+  telegram_domain:
+    <<: *mrs_domain
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
+    path: ./ruleset/telegram_domain.mrs
+  google_domain:
+    <<: *mrs_domain
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    path: ./ruleset/google_domain.mrs
+  openai_domain:
+    <<: *mrs_domain
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs
+    path: ./ruleset/openai_domain.mrs
+  claude_domain:
+    <<: *mrs_domain
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/anthropic.mrs
+    path: ./ruleset/claude_domain.mrs
+  geolocation-!cn:
+    <<: *mrs_domain
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs
+    path: ./ruleset/geolocation-!cn.mrs
+  cn_ip:
+    <<: *mrs_ip
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
+    path: ./ruleset/cn_ip.mrs
+  telegram_ip:
+    <<: *mrs_ip
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
+    path: ./ruleset/telegram_ip.mrs
+
+# ================= 策略组 (带 UI 图标) =================
+proxy-groups:
+  - name: PROXY
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png
+    proxies: [AUTO, HK AUTO, SG AUTO, JP AUTO, US AUTO]
+    use: [MySub]
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+
+  - name: AUTO
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
+    use: [MySub]
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    interval: 300
+    tolerance: 50
+
+  - name: AIGC
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Bot.png
+    proxies: [SG AUTO, JP AUTO, US AUTO]
+
+  - name: Telegram
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
+    proxies: [HK AUTO, SG AUTO, JP AUTO, US AUTO]
+
+  - name: Google
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png
+    proxies: [HK AUTO, SG AUTO, JP AUTO, US AUTO]
+
+  - name: HK AUTO
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png
+    use: [MySub]
+    filter: (?i)香港|Hong Kong|HK|🇭🇰
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    interval: 300
+    tolerance: 50
+
+  - name: SG AUTO
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png
+    use: [MySub]
+    filter: (?i)新加坡|Singapore|🇸🇬
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    interval: 300
+    tolerance: 50
+
+  - name: JP AUTO
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png
+    use: [MySub]
+    filter: (?i)日本|Japan|🇯🇵
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    interval: 300
+    tolerance: 50
+
+  - name: US AUTO
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png
+    use: [MySub]
+    filter: (?i)美国|USA|🇺🇸
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
+    interval: 300
+    tolerance: 50
+
+  - name: GLOBAL
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png
+    proxies: [PROXY, AUTO, AIGC, Telegram, Google]
+    use: [MySub]
+
+# ================= 路由规则 =================
+rules:
+  - RULE-SET,private,DIRECT
+  - RULE-SET,openai_domain,AIGC
+  - RULE-SET,claude_domain,AIGC
+  - RULE-SET,telegram_domain,Telegram
+  - RULE-SET,telegram_ip,Telegram,no-resolve
+  - RULE-SET,google_domain,Google
+  - RULE-SET,geolocation-!cn,PROXY
+  - RULE-SET,cn_domain,DIRECT
+  - RULE-SET,cn_ip,DIRECT,no-resolve
+  - MATCH,PROXY
