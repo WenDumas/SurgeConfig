@@ -1,56 +1,85 @@
-# ================= 锚点配置 =================
-anchors:
-  provider: &p {type: http, interval: 3600, health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}}
-  mrs_domain: &mrs_domain {type: http, behavior: domain, format: mrs, interval: 86400}
-  mrs_ip: &mrs_ip {type: http, behavior: ipcidr, format: mrs, interval: 86400}
-
 # ================= 远端订阅 =================
 proxy-providers:
   MySub:
-    <<: *p
+    type: http
     url: "https://你的订阅链接填这里"
     path: ./providers/mysub.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      interval: 600
+      url: "http://www.gstatic.com/generate_204"
 
 # ================= 规则集 (高性能 .mrs) =================
 rule-providers:
   private:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
     path: ./ruleset/private.mrs
   wechat_domain:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/wechat.mrs"
     path: ./ruleset/wechat_domain.mrs
   cn_domain:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
     path: ./ruleset/cn_domain.mrs
   telegram_domain:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
     path: ./ruleset/telegram_domain.mrs
   google_domain:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
     path: ./ruleset/google_domain.mrs
   openai_domain:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
     path: ./ruleset/openai_domain.mrs
   claude_domain:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/anthropic.mrs"
     path: ./ruleset/claude_domain.mrs
   geolocation-!cn:
-    <<: *mrs_domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
     path: ./ruleset/geolocation-!cn.mrs
   cn_ip:
-    <<: *mrs_ip
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
     path: ./ruleset/cn_ip.mrs
   telegram_ip:
-    <<: *mrs_ip
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
     url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
     path: ./ruleset/telegram_ip.mrs
 
