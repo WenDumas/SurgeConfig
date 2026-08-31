@@ -2,7 +2,7 @@
 proxy-providers:
   MySub:
     type: http
-    url: ""
+    url: "你的订阅链接填这里"
     interval: 3600
     path: ./providers/mysub.yaml
     health-check:
