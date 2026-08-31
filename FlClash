@@ -1,0 +1,142 @@
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 127.0.0.1:9090
+
+# DNS 模块优化
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  ipv6: false
+  respect-ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 8.8.8.8
+  fallback:
+    - 8.8.8.8
+    - 1.1.1.1
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    domain:
+      - "+.google.com"
+      - "+.facebook.com"
+      - "+.youtube.com"
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "*.arpa"
+    - "time.*.com"
+    - "ntp.*.com"
+    - "*.market.xiaomi.com"
+    - "localhost.ptlogin2.qq.com"
+    - "*.msftncsi.com"
+    - "www.msftconnecttest.com"
+
+# 本地自定义解析
+hosts:
+  # 可以在此处加入你原本的 Host 规则
+
+# ----------------------------------------------------------------
+# 节点订阅源配置区块（你可以在这里直接添加你的机场或节点订阅链接）
+# ----------------------------------------------------------------
+proxy-providers:
+  my_subscription:
+    type: http
+    # 把下面引号内的 URL 换成你的实际节点订阅/机场链接
+    url: "你的机场订阅链接填在这里"
+    interval: 86400
+     здоровья: true
+    path: ./proxies/my_sub.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+
+# 手动补充的备用单个节点（如果需要）
+proxies: []
+
+# 策略组（通过 filter 关键字自动把订阅里的节点抓取进来，省去手动填写的麻烦）
+proxy-groups:
+  - name: "🔰 节点选择"
+    type: select
+    use:
+      - my_subscription
+    proxies:
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+
+  - name: "♻️ 自动选择"
+    type: url-test
+    use:
+      - my_subscription
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+    tolerance: 50
+
+  - name: "🌍 国外媒体"
+    type: select
+    proxies:
+      - "🔰 节点选择"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+
+  - name: "Ⓜ️ 微软服务"
+    type: select
+    proxies:
+      - "🎯 全球直连"
+      - "🔰 节点选择"
+
+  - name: "📲 电报信息"
+    type: select
+    proxies:
+      - "🔰 节点选择"
+      - "🎯 全球直连"
+
+  - name: "🍎 苹果服务"
+    type: select
+    proxies:
+      - "🔰 节点选择"
+      - "🎯 全球直连"
+      - "♻️ 自动选择"
+
+  - name: "🐟 漏网之鱼"
+    type: select
+    proxies:
+      - "🔰 节点选择"
+      - "🎯 全球直连"
+      - "♻️ 自动选择"
+
+  - name: "🎯 全球直连"
+    type: select
+    proxies:
+      - DIRECT
+
+  - name: "🛑 全球拦截"
+    type: select
+    proxies:
+      - REJECT
+
+rules:
+  # 局域网直连
+  - IP-CIDR,192.168.0.0/16,🎯 全球直连,no-resolve
+  - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
+  - IP-CIDR,127.0.0.0/8,🎯 全球直连,no-resolve
+  
+  # 微软与基础服务
+  - DOMAIN-KEYWORD,microsoft,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,bing.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,live.com,Ⓜ️ 微软服务
+
+  # 微信及国内兜底优化（带 no-resolve 防止卡顿）
+  - RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list,🎯 全球直连
+  - GEOIP,CN,🎯 全球直连,no-resolve
+
+  # 最终兜底
+  - MATCH,🐟 漏网之鱼
